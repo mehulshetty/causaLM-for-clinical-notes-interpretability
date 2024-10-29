@@ -1,0 +1,167 @@
+,Unnamed: 0,X,Y,TC
+0,0,"Q: What is your age? A: 18. Q: What is your sex? A: Male. Q: What is your pathology? A: URTI. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Do you live with 4 or more people? A: Yes. Q: Have you had significantly increased sweating? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Heavy, sensitive. Q: Do you feel pain somewhere? A: Cheek(r), forehead, temple(l). Q: How intense is the pain? A: 4. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 3. Q: How fast did the pain appear? A: 3. Q: Do you have a cough that produces colored or more abundant sputum than usual? A: Yes. Q: Do you smoke cigarettes? A: Yes. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Do you have a sore throat? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are you exposed to secondhand cigarette smoke on a daily basis? A: Yes.","[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.12429044
+ 0.         0.19171204 0.         0.04984197 0.         0.
+ 0.         0.         0.         0.         0.         0.07333004
+ 0.11057936 0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.17579341 0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.11367177 0.16078097 0.         0.
+ 0.        ]",0
+1,1,"Q: What is your age? A: 21. Q: What is your sex? A: Male. Q: What is your pathology? A: HIV (initial infection). Q: Have you had significantly increased sweating? A: Yes. Q: Do you have swollen or painful lymph nodes? A: Yes. Q: Have you ever had a sexually transmitted infection? A: Yes. Q: Have you had significantly increased sweating? A: Yes. Q: Have you had diarrhea or an increase in stool frequency? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Exhausting. Q: Do you feel pain somewhere? A: Temple(l), temple(r), top of the head. Q: How intense is the pain? A: 7. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 7. Q: How fast did the pain appear? A: 2. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Have you had unprotected sex with more than one partner in the last 6 months? A: Yes. Q: Do you have any lesions, redness or problems on your skin that you believe are related to the condition you are consulting for? A: Yes. Q: What color is the rash? A: Pale. Q: Do your lesions peel off? A: N. Q: Is the rash swollen? A: 0. Q: Where is the affected region located? A: Internal cheek(l), internal cheek(r), labia majora(r), lower gum, upper gum. Q: How intense is the pain caused by the rash? A: 6. Q: Is the lesion (or are the lesions) larger than 1cm? A: Y. Q: How severe is the itching? A: 0. Q: Are you feeling nauseous or do you feel like vomiting? A: Yes. Q: Have you had an involuntary weight loss over the last 3 months? A: Yes. Q: Have you had sexual intercourse with an HIV-positive partner in the past 12 months? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.","[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.3217819  0.         0.
+ 0.         0.         0.         0.         0.         0.51895005
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.02430046 0.13496758 0.
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",0
+2,2,"Q: What is your age? A: 19. Q: What is your sex? A: Female. Q: What is your pathology? A: Pneumonia. Q: Do you have a cough that produces colored or more abundant sputum than usual? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: A knife stroke, sharp. Q: Do you feel pain somewhere? A: Lower chest, posterior chest wall(l), posterior chest wall(r), side of the chest(l), side of the chest(r). Q: How intense is the pain? A: 5. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 2. Q: How fast did the pain appear? A: 6. Q: Do you have a cough that produces colored or more abundant sputum than usual? A: Yes. Q: Do you drink alcohol excessively or do you have an addiction to alcohol? A: Yes. Q: Do you smoke cigarettes? A: Yes. Q: Have you had chills or shivers? A: Yes. Q: Do you have heart failure? A: Yes. Q: Have you ever had pneumonia? A: Yes. Q: Do you have a chronic obstructive pulmonary disease (COPD)? A: Yes. Q: Do you have asthma or have you ever had to use a bronchodilator in the past? A: Yes. Q: Do you have any lesions, redness or problems on your skin that you believe are related to the condition you are consulting for? A: Yes. Q: What color is the rash? A: Pink. Q: Do your lesions peel off? A: Y. Q: Is the rash swollen? A: 4. Q: Where is the affected region located? A: Flank(l), side of the neck(l). Q: How intense is the pain caused by the rash? A: 0. Q: Is the lesion (or are the lesions) larger than 1cm? A: N. Q: How severe is the itching? A: 0. Q: Do you have diffuse (widespread) muscle pain? A: Yes. Q: Have you noticed any new fatigue, generalized and vague discomfort, diffuse (widespread) muscle aches or a change in your general well-being related to your consultation today? A: Yes. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.","[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.07708363 0.07764174
+ 0.         0.11278065 0.         0.02923384 0.         0.
+ 0.         0.         0.         0.06455233 0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.00935997 0.07504681 0.10048135 0.08343171
+ 0.         0.         0.         0.01640692 0.05879006 0.
+ 0.0768235  0.06667817 0.         0.06705952 0.0846298  0.
+ 0.        ]",1
+3,3,"Q: What is your age? A: 34. Q: What is your sex? A: Female. Q: What is your pathology? A: URTI. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Do you live with 4 or more people? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Heavy. Q: Do you feel pain somewhere? A: Cheek(l), forehead, occiput, temple(l), temple(r). Q: How intense is the pain? A: 7. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 5. Q: How fast did the pain appear? A: 4. Q: Do you have a sore throat? A: Yes. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.","[0.         0.         0.         0.         0.         0.10748772
+ 0.         0.         0.0706498  0.         0.         0.
+ 0.         0.17734715 0.         0.0706498  0.14960995 0.1856616
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.23859397 0.         0.
+ 0.        ]",0
+4,4,"Q: What is your age? A: 36. Q: What is your sex? A: Male. Q: What is your pathology? A: URTI. Q: Do you have a cough? A: Yes. Q: Do you attend or work in a daycare? A: Yes. Q: Have you had significantly increased sweating? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Heavy. Q: Do you feel pain somewhere? A: Occiput, temple(l), temple(r), top of the head. Q: How intense is the pain? A: 5. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 4. Q: How fast did the pain appear? A: 2. Q: Do you have a sore throat? A: Yes. Q: Do you have diffuse (widespread) muscle pain? A: Yes. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.","[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.06577925 0.         0.         0.
+ 0.         0.16512096 0.         0.06577925 0.13929595 0.14304578
+ 0.         0.         0.         0.         0.         0.
+ 0.18420067 0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.23677813 0.         0.
+ 0.        ]",0
+5,5,"Q: What is your age? A: 37. Q: What is your sex? A: Female. Q: What is your pathology? A: Chronic rhinosinusitis. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Burning, sharp. Q: Do you feel pain somewhere? A: Cheek(l), cheek(r), eye(r), forehead, nose. Q: How intense is the pain? A: 6. Q: Does the pain radiate to another location? A: Forehead, nose, temple(l), temple(r). Q: How precisely is the pain located? A: 3. Q: How fast did the pain appear? A: 1. Q: Do you smoke cigarettes? A: Yes. Q: Have you lost your sense of smell? A: Yes. Q: Have you had a cold in the last 2 weeks? A: Yes. Q: Have you ever had pneumonia? A: Yes. Q: Do you have polyps in your nose? A: Yes. Q: Do you have a deviated nasal septum? A: Yes. Q: Do you have asthma or have you ever had to use a bronchodilator in the past? A: Yes. Q: Have you ever been diagnosed with gastroesophageal reflux? A: Yes. Q: Do you have greenish or yellowish nasal discharge? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are you more likely to develop common allergies than the general population? A: Yes.","[0.         0.         0.         0.         0.         0.25757387
+ 0.         0.         0.07758074 0.         0.         0.
+ 0.         0.22014946 0.         0.07758074 0.24065363 0.12646157
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",0
+6,6,"Q: What is your age? A: 43. Q: What is your sex? A: Male. Q: What is your pathology? A: Viral pharyngitis. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Have you been in contact with a person with similar symptoms in the past 2 weeks? A: Yes. Q: Do you attend or work in a daycare? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Burning, sensitive. Q: Do you feel pain somewhere? A: Palace, pharynx, thyroid cartilage, tonsil(l), tonsil(r). Q: How intense is the pain? A: 5. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 9. Q: How fast did the pain appear? A: 3. Q: Do you smoke cigarettes? A: Yes. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are you immunosuppressed? A: Yes.","[0.         0.         0.16973668 0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.2472607  0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.13873577
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.16232195 0.         0.12948541 0.15245947
+ 0.        ]",0
+7,7,"Q: What is your age? A: 39. Q: What is your sex? A: Male. Q: What is your pathology? A: Anemia. Q: Do you feel so tired that you are unable to do your usual activities or are you stuck in your bed all day long? A: Yes. Q: Do you have a poor diet? A: Yes. Q: Have you ever had a diagnosis of anemia? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: A cramp, tugging. Q: Do you feel pain somewhere? A: Forehead, temple(l). Q: How intense is the pain? A: 1. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 3. Q: How fast did the pain appear? A: 4. Q: Do you feel lightheaded and dizzy or do you feel like you are about to faint? A: Yes. Q: Do you feel so tired that you are unable to do your usual activities or are you stuck in your bed all day long? A: Yes. Q: Do you have chronic kidney failure? A: Yes. Q: Have you recently had stools that were black (like coal)? A: Yes. Q: Are you taking any new oral anticoagulants ((NOACs)? A: Yes. Q: Is your skin much paler than usual? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: Central america. Q: Is your BMI less than 18.5, or are you underweight? A: Yes.","[0.         0.         0.         0.         0.         0.
+ 0.         0.21268183 0.35566843 0.         0.         0.
+ 0.         0.         0.         0.20576236 0.         0.1726863
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.05320109 0.
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",0
+8,8,"Q: What is your age? A: 30. Q: What is your sex? A: Male. Q: What is your pathology? A: Chronic rhinosinusitis. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Sharp. Q: Do you feel pain somewhere? A: Cheek(l), cheek(r), eye(r), forehead, nose. Q: How intense is the pain? A: 2. Q: Does the pain radiate to another location? A: Forehead, temple(r). Q: How precisely is the pain located? A: 8. Q: How fast did the pain appear? A: 0. Q: Do you smoke cigarettes? A: Yes. Q: Have you lost your sense of smell? A: Yes. Q: Have you had a cold in the last 2 weeks? A: Yes. Q: Have you ever had pneumonia? A: Yes. Q: Do you have polyps in your nose? A: Yes. Q: Do you have asthma or have you ever had to use a bronchodilator in the past? A: Yes. Q: Have you ever been diagnosed with gastroesophageal reflux? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are you more likely to develop common allergies than the general population? A: Yes.","[0.         0.         0.         0.         0.         0.08952029
+ 0.         0.         0.11717519 0.         0.         0.
+ 0.         0.3325059  0.         0.11717519 0.19361301 0.15001042
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",0
+9,9,"Q: What is your age? A: 49. Q: What is your sex? A: Male. Q: What is your pathology? A: Atrial fibrillation. Q: Are you experiencing shortness of breath or difficulty breathing in a significant way? A: Yes. Q: Have you been diagnosed with hyperthyroidism? A: Yes. Q: Do you have a known issue with one of your heart valves? A: Yes. Q: Do you have severe Chronic Obstructive Pulmonary Disease (COPD)? A: Yes. Q: Are you experiencing shortness of breath or difficulty breathing in a significant way? A: Yes. Q: Do you have diabetes? A: Yes. Q: Are you significantly overweight compared to people of the same height as you? A: Yes. Q: Do you feel slightly dizzy or lightheaded? A: Yes. Q: Do you have high blood pressure or do you take medications to treat high blood pressure? A: Yes. Q: Have you ever had a heart attack or do you have angina (chest pain)? A: Yes. Q: Do you have a known heart defect? A: Yes. Q: Do you feel your heart is beating fast (racing), irregularly (missing a beat) or do you feel palpitations? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Do you have symptoms that are increased with physical exertion but alleviated with rest? A: Yes.","[0.         0.06972699 0.         0.         0.09943515 0.
+ 0.         0.06972699 0.10832398 0.10166492 0.         0.
+ 0.         0.         0.         0.0209861  0.         0.
+ 0.         0.         0.         0.         0.09901443 0.
+ 0.         0.         0.         0.         0.06972699 0.09174193
+ 0.14665917 0.         0.         0.         0.         0.0209861
+ 0.         0.         0.03228027 0.         0.06972699 0.
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",0
+10,10,"Q: What is your age? A: 8. Q: What is your sex? A: Male. Q: What is your pathology? A: Allergic sinusitis. Q: Is your nose or the back of your throat itchy? A: Yes. Q: Do you have any close family members who suffer from allergies (any type), hay fever or eczema? A: Yes. Q: Do you have any family members who have asthma? A: Yes. Q: Do you have asthma or have you ever had to use a bronchodilator in the past? A: Yes. Q: Is your nose or the back of your throat itchy? A: Yes. Q: Do you have severe itching in one or both eyes? A: Yes. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Do you live in in a big city? A: Yes.","[0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0.]",0
+11,11,Q: What is your age? A: 3. Q: What is your sex? A: Female. Q: What is your pathology? A: Larygospasm. Q: Have you noticed a high pitched sound when breathing in? A: Yes. Q: Have you had a cold in the last 2 weeks? A: Yes. Q: Have you ever been diagnosed with gastroesophageal reflux? A: Yes. Q: Have you noticed a high pitched sound when breathing in? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: North america. Q: Are you exposed to secondhand cigarette smoke on a daily basis? A: Yes.,"[0.        0.        0.        0.        0.        0.        0.
+ 0.        0.        0.        0.        0.        0.        0.
+ 0.        0.        0.        0.        0.5227139 0.        0.
+ 0.        0.        0.        0.        0.        0.4772861 0.
+ 0.        0.        0.        0.        0.        0.        0.
+ 0.        0.        0.        0.        0.        0.        0.
+ 0.        0.        0.        0.        0.        0.        0.       ]",0
+12,12,"Q: What is your age? A: 52. Q: What is your sex? A: Male. Q: What is your pathology? A: Cluster headache. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Have any of your family members been diagnosed with cluster headaches? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: A knife stroke, haunting, sharp, tugging, violent. Q: Do you feel pain somewhere? A: Cheek(r), eye(l), eye(r), forehead, temple(r). Q: How intense is the pain? A: 7. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 10. Q: How fast did the pain appear? A: 9. Q: Do you drink alcohol excessively or do you have an addiction to alcohol? A: Yes. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Do you take medication that dilates your blood vessels? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.","[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.31499696 0.         0.         0.
+ 0.         0.         0.         0.         0.         0.68500304
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",0
+13,13,"Q: What is your age? A: 49. Q: What is your sex? A: Female. Q: What is your pathology? A: Anaphylaxis. Q: Did you lose consciousness? A: Yes. Q: Do you have a known severe food allergy? A: Yes. Q: Have you been in contact with or ate something that you have an allergy to? A: Yes. Q: Have you had diarrhea or an increase in stool frequency? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: A cramp, sharp. Q: Do you feel pain somewhere? A: Epigastric, hypochondrium(l), hypochondrium(r), iliac fossa(l), iliac fossa(r). Q: How intense is the pain? A: 3. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 4. Q: How fast did the pain appear? A: 2. Q: Are you experiencing shortness of breath or difficulty breathing in a significant way? A: Yes. Q: Do you have any lesions, redness or problems on your skin that you believe are related to the condition you are consulting for? A: Yes. Q: What color is the rash? A: Pink. Q: Do your lesions peel off? A: N. Q: Is the rash swollen? A: 0. Q: Where is the affected region located? A: Ankle(r), back of the neck, biceps(l), mouth, thyroid cartilage. Q: How intense is the pain caused by the rash? A: 3. Q: Is the lesion (or are the lesions) larger than 1cm? A: Y. Q: How severe is the itching? A: 10. Q: Are you feeling nauseous or do you feel like vomiting? A: Yes. Q: Do you have swelling in one or more areas of your body? A: Yes. Q: Where is the swelling located? A: Cheek(l), cheek(r), forehead. Q: Did you lose consciousness? A: Yes. Q: Have you noticed a high pitched sound when breathing in? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are you more likely to develop common allergies than the general population? A: Yes.","[0.         0.03034635 0.         0.         0.06480055 0.
+ 0.         0.08818818 0.03034635 0.04116135 0.05916277 0.
+ 0.         0.         0.         0.04272325 0.         0.
+ 0.         0.         0.         0.05999577 0.04309273 0.05523967
+ 0.         0.05276907 0.05033009 0.         0.03034635 0.
+ 0.         0.05356853 0.04381874 0.03761776 0.         0.05359391
+ 0.05202542 0.         0.         0.         0.         0.
+ 0.         0.04656082 0.         0.         0.06431233 0.
+ 0.        ]",0
+14,14,"Q: What is your age? A: 47. Q: What is your sex? A: Male. Q: What is your pathology? A: Viral pharyngitis. Q: Do you have a cough? A: Yes. Q: Have you been in contact with a person with similar symptoms in the past 2 weeks? A: Yes. Q: Have you been coughing up blood? A: Yes. Q: Do you attend or work in a daycare? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Burning, sensitive. Q: Do you feel pain somewhere? A: Palace, pharynx, thyroid cartilage, tonsil(l), tonsil(r). Q: How intense is the pain? A: 5. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 4. Q: How fast did the pain appear? A: 1. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are you immunosuppressed? A: Yes.","[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.22011228 0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.11117624 0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.02591252 0.12350303
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.0423706  0.21172583 0.         0.11526833 0.14993116
+ 0.        ]",0
+15,15,"Q: What is your age? A: 55. Q: What is your sex? A: Female. Q: What is your pathology? A: Spontaneous pneumothorax. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Have you ever had a spontaneous pneumothorax? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Heartbreaking. Q: Do you feel pain somewhere? A: Breast(l), breast(r), upper chest. Q: How intense is the pain? A: 8. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 1. Q: How fast did the pain appear? A: 8. Q: Are you experiencing shortness of breath or difficulty breathing in a significant way? A: Yes. Q: Do you smoke cigarettes? A: Yes. Q: Do you have a chronic obstructive pulmonary disease (COPD)? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Do you have pain that is increased when you breathe in deeply? A: Yes.","[0.         0.07075997 0.         0.         0.         0.
+ 0.         0.         0.         0.0959778  0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.0899145  0.10048129 0.
+ 0.         0.         0.         0.         0.         0.0181834
+ 0.03779748 0.         0.         0.10560361 0.         0.13593736
+ 0.14515883 0.         0.         0.         0.04475971 0.15542606
+ 0.         0.         0.         0.         0.         0.
+ 0.        ]",1
+16,16,"Q: What is your age? A: 57. Q: What is your sex? A: Female. Q: What is your pathology? A: Cluster headache. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Have any of your family members been diagnosed with cluster headaches? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: A knife stroke, sharp, tugging, violent. Q: Do you feel pain somewhere? A: Cheek(r), eye(l), eye(r), forehead, temple(r). Q: How intense is the pain? A: 9. Q: Does the pain radiate to another location? A: Nowhere. Q: How precisely is the pain located? A: 5. Q: How fast did the pain appear? A: 9. Q: Do you drink alcohol excessively or do you have an addiction to alcohol? A: Yes. Q: Do you feel that your eyes produce excessive tears? A: Yes. Q: Did you previously, or do you currently, have any weakness/paralysis in one or more of your limbs or in your face? A: Yes. Q: Do you have nasal congestion or a clear runny nose? A: Yes. Q: Do you take medication that dilates your blood vessels? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.","[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0.]",0
+17,17,"Q: What is your age? A: 35. Q: What is your sex? A: Female. Q: What is your pathology? A: Acute pulmonary edema. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Have you ever had fluid in your lungs? A: Yes. Q: Have you had significantly increased sweating? A: Yes. Q: Do you have pain somewhere, related to your reason for consulting? A: Yes. Q: Characterize your pain: A: Heavy, sensitive, tedious, tugging. Q: Do you feel pain somewhere? A: Ankle(l), ankle(r), breast(r), posterior chest wall(l), posterior chest wall(r). Q: How intense is the pain? A: 9. Q: Does the pain radiate to another location? A: Biceps(l), shoulder(l), shoulder(r), triceps(l), triceps(r). Q: How precisely is the pain located? A: 1. Q: How fast did the pain appear? A: 5. Q: Are you experiencing shortness of breath or difficulty breathing in a significant way? A: Yes. Q: Do you have high blood pressure or do you take medications to treat high blood pressure? A: Yes. Q: Have you ever had a heart attack or do you have angina (chest pain)? A: Yes. Q: Do you have heart failure? A: Yes. Q: Do you have swelling in one or more areas of your body? A: Yes. Q: Where is the swelling located? A: Ankle(r), calf(l), tibia(l), tibia(r). Q: Have you noticed any new fatigue, generalized and vague discomfort, diffuse (widespread) muscle aches or a change in your general well-being related to your consultation today? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N. Q: Are your symptoms worse when lying down and alleviated while sitting up? A: Yes. Q: Do you have symptoms that are increased with physical exertion but alleviated with rest? A: Yes.","[0.         0.03378811 0.         0.         0.08794825 0.
+ 0.         0.06673513 0.         0.05565276 0.         0.
+ 0.         0.         0.         0.04120028 0.         0.
+ 0.         0.         0.         0.         0.04798014 0.
+ 0.         0.         0.         0.         0.03378811 0.0706275
+ 0.         0.         0.07308319 0.06294909 0.         0.0753678
+ 0.06061703 0.03051766 0.06272203 0.02766968 0.02137291 0.
+ 0.         0.06941149 0.         0.         0.07856882 0.
+ 0.        ]",1
+18,18,Q: What is your age? A: 69. Q: What is your sex? A: Male. Q: What is your pathology? A: Tuberculosis. Q: Do you have a cough? A: Yes. Q: Are you infected with the human immunodeficiency virus (HIV)? A: Yes. Q: Do you take corticosteroids? A: Yes. Q: Are you currently using intravenous drugs? A: Yes. Q: Do you have diabetes? A: Yes. Q: Do you drink alcohol excessively or do you have an addiction to alcohol? A: Yes. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Have you had an involuntary weight loss over the last 3 months? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.,"[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.44474113 0.         0.03544427 0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.16929723 0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.35051736 0.         0.         0.
+ 0.        ]",0
+19,19,Q: What is your age? A: 30. Q: What is your sex? A: Female. Q: What is your pathology? A: Tuberculosis. Q: Have you been coughing up blood? A: Yes. Q: Do you take corticosteroids? A: Yes. Q: Have you been coughing up blood? A: Yes. Q: Do you drink alcohol excessively or do you have an addiction to alcohol? A: Yes. Q: Do you have a fever (either felt or measured with a thermometer)? A: Yes. Q: Do you have a cough? A: Yes. Q: Have you traveled out of the country in the last 4 weeks? A: N.,"[0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.4184266  0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.         0.         0.19219251 0.
+ 0.         0.         0.         0.         0.         0.
+ 0.         0.         0.38938087 0.         0.         0.
+ 0.        ]",0
