@@ -10,7 +10,7 @@ import re
 from collections import defaultdict
 
 # Load the clinical notes dataset
-df = pd.read_csv('../data/release_train_patients.csv')  # Replace with your actual file path
+df = pd.read_csv('../data/release_train_patients.csv.txt')  # Replace with your actual file path
 
 # Load the evidence mapping dataset
 with open('../data/release_evidences.json', 'r') as f:
@@ -97,7 +97,10 @@ all_diseases = sorted([details['condition_name'] for details in disease_mapping.
 disease_to_index = {disease: idx for idx, disease in enumerate(all_diseases)}
 
 # Handles Unknown Diseases
-disease_to_index['Other'] = 49
+disease_to_index['Other'] = len(all_diseases)  # Index 49
+
+# Now total number of diseases
+num_diseases = len(all_diseases) + 1  # 49 + 1 = 50
 
 #print(disease_to_index)
 # {'Acute COPD exacerbation / infection': 0, 'Acute dystonic reactions': 1, 'Acute laryngitis': 2, 'Acute otitis media': 3, 'Acute pulmonary edema': 4, 'Acute rhinosinusitis': 5, 'Allergic sinusitis': 6, 'Anaphylaxis': 7, 'Anemia': 8, 'Atrial fibrillation': 9, 'Boerhaave': 10, 'Bronchiectasis': 11, 'Bronchiolitis': 12, 'Bronchitis': 13, 'Bronchospasm / acute asthma exacerbation': 14, 'Chagas': 15, 'Chronic rhinosinusitis': 16, 'Cluster headache': 17, 'Croup': 18, 'Ebola': 19, 'Epiglottitis': 20, 'GERD': 21, 'Guillain-Barré syndrome': 22, 'HIV (initial infection)': 23, 'Influenza': 24, 'Inguinal hernia': 25, 'Larygospasm': 26, 'Localized edema': 27, 'Myasthenia gravis': 28, 'Myocarditis': 29, 'PSVT': 30, 'Pancreatic neoplasm': 31, 'Panic attack': 32, 'Pericarditis': 33, 'Pneumonia': 34, 'Possible NSTEMI / STEMI': 35, 'Pulmonary embolism': 36, 'Pulmonary neoplasm': 37, 'SLE': 38, 'Sarcoidosis': 39, 'Scombroid food poisoning': 40, 'Spontaneous pneumothorax': 41, 'Spontaneous rib fracture': 42, 'Stable angina': 43, 'Tuberculosis': 44, 'URTI': 45, 'Unstable angina': 46, 'Viral pharyngitis': 47, 'Whooping cough': 48, 'Other': 49}
@@ -108,23 +111,22 @@ data = pd.DataFrame({
 
 # Function to parse Y and create fixed-length vector
 def parse_y(y_str, disease_to_index, num_diseases):
-    # Safely evaluate the string to a Python list
     try:
         y_list = ast.literal_eval(y_str)
     except:
         y_list = []
 
-    y_vector = np.zeros(num_diseases, dtype=np.float32)
+    y_vector = np.zeros(num_diseases, dtype=np.float32)  # Now length 50
     for disease, prob in y_list:
         if disease in disease_to_index:
             idx = disease_to_index[disease]
             y_vector[idx] = prob
         else:
-            # Optionally handle unknown diseases
-            y_vector[-1] += prob
+            # Handle unknown diseases by incrementing the 'Other' category
+            y_vector[disease_to_index['Other']] += prob
     return y_vector
 
-data['Y'] = df["DIFFERENTIAL_DIAGNOSIS"].apply(lambda y: parse_y(y, disease_to_index, len(all_diseases)))
+data['Y'] = df["DIFFERENTIAL_DIAGNOSIS"].apply(lambda y: parse_y(y, disease_to_index, num_diseases))
 
 # Define chest-related terms
 chest_related_terms = [
@@ -164,4 +166,3 @@ def extract_chest_pain_label(x_text, chest_terms):
 data['TC'] = data['X'].apply(lambda x: extract_chest_pain_label(x, chest_related_terms))
 
 data.to_csv('../data/input.csv', index=False)
-

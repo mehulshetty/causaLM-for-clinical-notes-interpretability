@@ -10,6 +10,43 @@ from torch.utils.data import Dataset
 from transformers import BertTokenizerFast, BertModel, BertPreTrainedModel, BertConfig, BertForPreTraining, Trainer, TrainingArguments, DataCollatorForLanguageModeling
 
 ### DATA PREP ###
+
+def sample_csv_pandas(input_file, output_file, sample_size, random_state=None):
+    """
+    Samples a specified number of rows from an input CSV file and saves them to a new CSV file.
+
+    Parameters:
+    - input_file (str): Path to the input CSV file.
+    - output_file (str): Path to save the sampled CSV file.
+    - sample_size (int): Number of samples to draw.
+    - random_state (int, optional): Seed for reproducibility.
+
+    Usage:
+    sample_csv_pandas('path/to/input.csv', 'path/to/sampled_input.csv', 50000, random_state=42)
+    """
+    try:
+        # Read the entire CSV into a DataFrame
+        print("Loading the input CSV file...")
+        df = pd.read_csv(input_file)
+        print(f"Input CSV loaded with {len(df)} rows.")
+
+        # Sample the DataFrame
+        print(f"Sampling {sample_size} rows from the dataset...")
+        sampled_df = df.sample(n=sample_size, random_state=random_state)
+        print("Sampling completed.")
+
+        # Save the sampled DataFrame to a new CSV
+        print(f"Saving the sampled data to {output_file}...")
+        sampled_df.to_csv(output_file, index=False)
+        print("Sampled data saved successfully.")
+
+    except MemoryError:
+        print("MemoryError: The dataset is too large to fit into memory using Pandas' sample method.")
+        print("Consider using the reservoir sampling method provided below for large datasets.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
 # Function to split Q&A into a group of two sentences
 def split_qa(x_text):
     # Split based on 'Q:' and 'A:'
@@ -23,30 +60,33 @@ def split_qa(x_text):
 
     return grouped_pairs
 
-def generate_negative_nsp_pairs(sentence_a, sentence_b, num_negatives=None):
-
+def generate_negative_nsp_pairs(sentence_a, sentence_b, labels_nsp, num_negatives=None, data_indices=None):
     if num_negatives is None:
         num_negatives = len(sentence_a)
-    
+
     negative_sentence_a = []
     negative_sentence_b = []
     negative_labels_nsp = []
-    
+    negative_indices = []
+
     for i in range(num_negatives):
         q = sentence_a[i]
-        # Select a random question that won't follow the first question
-        neg_a = random.choice(sentence_b)
-        while neg_a == sentence_b[i]:
-            neg_a = random.choice(sentence_b)
+        idx = data_indices[i]
+        # Select a random sentence_b that is not the true next sentence
+        neg_b = random.choice(sentence_b)
+        while neg_b == sentence_b[i]:
+            neg_b = random.choice(sentence_b)
         negative_sentence_a.append(q)
-        negative_sentence_b.append(neg_a)
+        negative_sentence_b.append(neg_b)
         negative_labels_nsp.append(0)
-    
+        negative_indices.append(idx)  # Keep the same data index for simplicity
+
     combined_sentence_a = sentence_a + negative_sentence_a
     combined_sentence_b = sentence_b + negative_sentence_b
-    combined_labels_nsp = [1]*len(sentence_a) + negative_labels_nsp
-    
-    return combined_sentence_a, combined_sentence_b, combined_labels_nsp
+    combined_labels_nsp = labels_nsp + negative_labels_nsp
+    combined_data_indices = data_indices + negative_indices
+
+    return combined_sentence_a, combined_sentence_b, combined_labels_nsp, combined_data_indices
 
 # For MLM labels, we'll use the DataCollator
 # Here, we prepare them manually
@@ -98,7 +138,7 @@ class GradientReversal(nn.Module):
     def forward(self, x):
         return GradientReversalFunction.apply(x)
 
-class CustomBertForPreTrainingWithAdversary(BertPreTrainedModel):
+class CustomBertForPreTrainingWithAdversary(BertForPreTraining):
     def __init__(self, config):
         super().__init__(config)
         self.bert_pretraining = BertForPreTraining(config)
@@ -154,7 +194,7 @@ class CustomBertForPreTrainingWithAdversary(BertPreTrainedModel):
 class BertForDiseasePrediction(nn.Module):
     def __init__(self, bert_model, num_diseases):
         super(BertForDiseasePrediction, self).__init__()
-        self.bert = bert_model.bert  # Use the pre-trained BERT model
+        self.bert = bert_model  # Use the pre-trained BERT model
         for param in self.bert.parameters():
             param.requires_grad = False  # Freeze BERT parameters
         
@@ -163,7 +203,7 @@ class BertForDiseasePrediction(nn.Module):
     
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, labels=None):
         with torch.no_grad():
-            outputs = self.bert(input_ids=input_ids, 
+            outputs = self.bert(input_ids=input_ids,
                                 attention_mask=attention_mask, 
                                 token_type_ids=token_type_ids,
                                 return_dict=True)
@@ -196,18 +236,18 @@ class MultiTaskDataset(Dataset):
         item['labels_nsp'] = self.labels_nsp[idx]
         item['chest_pain_labels'] = self.chest_pain_labels[idx]
         return item
-    
+
 class DiseasePredictionDataset(Dataset):
     def __init__(self, encodings, disease_labels):
         self.encodings = encodings
-        self.disease_labels = disease_labels
+        self.disease_labels = disease_labels.float()
 
     def __len__(self):
         return len(self.disease_labels)
 
     def __getitem__(self, idx):
-        item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
-        item['labels'] = torch.tensor(self.disease_labels[idx], dtype=torch.float32)
+        item = {key: val[idx] for key, val in self.encodings.items()}
+        item['labels'] = self.disease_labels[idx]
         return item
     
 
