@@ -1,4 +1,5 @@
 import argparse
+import ast
 import random
 import torch
 import re
@@ -8,6 +9,9 @@ import pandas as pd
 import torch.nn as nn
 from torch.utils.data import Dataset
 from transformers import BertTokenizerFast, BertModel, BertPreTrainedModel, BertConfig, BertForPreTraining, Trainer, TrainingArguments, DataCollatorForLanguageModeling
+
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 ### DATA PREP ###
 # Function to split Q&A into a group of two sentences
@@ -98,10 +102,9 @@ class GradientReversal(nn.Module):
     def forward(self, x):
         return GradientReversalFunction.apply(x)
 
-class CustomBertForPreTrainingWithAdversary(BertPreTrainedModel):
+class CustomBertForPreTrainingWithAdversary(BertForPreTraining):
     def __init__(self, config):
         super().__init__(config)
-        self.bert_pretraining = BertForPreTraining(config)
         
         # Adversarial Chest Pain Prediction Head
         self.grl = GradientReversal()
@@ -111,8 +114,8 @@ class CustomBertForPreTrainingWithAdversary(BertPreTrainedModel):
         self.init_weights()
     
     def forward(self, input_ids, attention_mask=None, token_type_ids=None,
-                labels_mlm=None, labels_nsp=None, chest_pain_labels=None, lambda_=1):
-        outputs = self.bert_pretraining(
+                labels_mlm=None, labels_nsp=None, chest_pain_labels=None, lambda_=3):
+        outputs = super().forward(
             input_ids=input_ids,
             attention_mask=attention_mask,
             token_type_ids=token_type_ids,
@@ -139,9 +142,16 @@ class CustomBertForPreTrainingWithAdversary(BertPreTrainedModel):
             masked_lm_loss = outputs.loss  # Assuming the main loss is MLM + NSP
             loss_fct_adversary = nn.BCELoss()
             chest_pain_loss = loss_fct_adversary(chest_pain_probs.view(-1), chest_pain_labels.view(-1))
+
+            global curr_step 
+            if curr_step % 1000 == 0:
+                print(f'cpl: {chest_pain_loss.item()} and mlm: {masked_lm_loss.item()}')
             
-            # Combined Loss: MLM + NSP - Lambda * Adversarial Loss
-            loss = masked_lm_loss - lambda_ * chest_pain_loss
+            curr_step += 1
+            
+            # Combined Loss: MLM + NSP + Lambda * Adversarial Loss
+            # The negative aspect will be added 
+            loss = masked_lm_loss + lambda_ * chest_pain_loss
         
         return {
             'loss': loss,
@@ -154,7 +164,7 @@ class CustomBertForPreTrainingWithAdversary(BertPreTrainedModel):
 class BertForDiseasePrediction(nn.Module):
     def __init__(self, bert_model, num_diseases):
         super(BertForDiseasePrediction, self).__init__()
-        self.bert = bert_model.bert  # Use the pre-trained BERT model
+        self.bert = bert_model  # Use the pre-trained BERT model
         for param in self.bert.parameters():
             param.requires_grad = False  # Freeze BERT parameters
         
@@ -206,7 +216,7 @@ class DiseasePredictionDataset(Dataset):
         return len(self.disease_labels)
 
     def __getitem__(self, idx):
-        item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
+        item = {key: val[idx].clone().detach() for key, val in self.encodings.items()}
         item['labels'] = torch.tensor(self.disease_labels[idx], dtype=torch.float32)
         return item
     
@@ -228,6 +238,25 @@ class DiseaseTrainer(Trainer):
         loss = outputs['loss']
         return (loss, outputs) if return_outputs else loss
     
+def parse_y_entry(y_str):
+    try:
+        # Step 1: Remove square brackets and newlines
+        y_str_clean = y_str.strip('[]').replace('\n', ' ')
+        
+        # Step 2: Split the string by whitespace to get individual numbers
+        y_list = y_str_clean.split()
+        
+        # Step 3: Convert the list of strings to a list of floats
+        y_floats = [float(num) for num in y_list]
+        
+        # Step 4: Convert the list of floats to a NumPy array
+        y_array = np.array(y_floats, dtype=np.float32)
+        
+        return y_array
+    except Exception as e:
+        print(f"Error parsing Y entry: {y_str}")
+        raise e
+    
 
 ## MAIN ##
 def main(args):
@@ -236,6 +265,9 @@ def main(args):
     np.random.seed(42)
     torch.manual_seed(42)
 
+    global curr_step
+    curr_step = 0
+
     #Args
     lambda_ = args.lambda_
     device = args.device
@@ -243,7 +275,8 @@ def main(args):
     train_csv = args.train_csv
     output_dir = args.output_dir
 
-    data = pd.read_csv('../data/shortest_input.csv')
+    data = pd.read_csv('../data/short_input.csv')
+    data = data[:1000]
     
     # 1. Split Q&A into Sentence Pairs
     sentence_a = []
@@ -272,7 +305,7 @@ def main(args):
         combined_sentence_b,
         truncation=True,
         padding='max_length',
-        max_length=512,
+        max_length=128,
         return_tensors='pt'
     )
 
@@ -311,12 +344,12 @@ def main(args):
     model_pretraining.to(device)
 
     print("7")
-    
+
     # 8. Define Training Arguments for Pre-Training
     training_args_pretraining = TrainingArguments(
         output_dir='./results_pretraining',
         num_train_epochs=epochs,
-        per_device_train_batch_size=8,
+        per_device_train_batch_size=3,
         gradient_accumulation_steps=2,
         save_strategy='epoch',
         logging_dir='./logs_pretraining',
@@ -353,8 +386,7 @@ def main(args):
     # 1. Prepare Data for Disease Prediction
     # Tokenize the original sentence pairs without masking
     tokenized_inputs_disease = tokenizer(
-        sentence_a,
-        sentence_b,
+        data['X'].tolist(),
         truncation=True,
         padding='max_length',
         max_length=512,
@@ -369,8 +401,7 @@ def main(args):
     # Adjust as per your data's actual correspondence
     # For simplicity, we map each positive NSP pair to its corresponding disease labels
     # This might need to be adjusted based on your actual data structure
-    disease_labels = data['Y'].values.repeat(len(sentence_a)).astype(np.float32)
-    disease_labels = torch.tensor(disease_labels)
+    disease_labels = data['Y'].apply(parse_y_entry)
 
     print("12")
     
@@ -381,7 +412,7 @@ def main(args):
     # 4. Initialize the Disease Prediction Model
     # Load the pre-trained model
     pretrained_model = BertModel.from_pretrained('./models/pretrained_model')
-    model_disease = BertForDiseasePrediction(pretrained_model, num_diseases=50)
+    model_disease = BertForDiseasePrediction(pretrained_model, num_diseases=49)
     model_disease.to(device)
 
     print("14")
@@ -390,7 +421,7 @@ def main(args):
     training_args_disease = TrainingArguments(
         output_dir='./results_disease',
         num_train_epochs=3,
-        per_device_train_batch_size=16,
+        per_device_train_batch_size=3,
         save_strategy='epoch',
         logging_dir='./logs_disease',
         logging_steps=50,
