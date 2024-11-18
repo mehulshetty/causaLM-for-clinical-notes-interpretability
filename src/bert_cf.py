@@ -9,6 +9,7 @@ import pandas as pd
 import torch.nn as nn
 from torch.utils.data import Dataset
 from transformers import BertTokenizerFast, BertModel, BertPreTrainedModel, BertConfig, BertForPreTraining, Trainer, TrainingArguments, DataCollatorForLanguageModeling
+from sparsemax import Sparsemax
 
 import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -170,23 +171,43 @@ class BertForDiseasePrediction(nn.Module):
         
         # Disease classification head
         self.classifier = nn.Linear(self.bert.config.hidden_size, num_diseases)
+
+        # Sparsemax Activation function
+        self.sparsemax = Sparsemax(dim=1)
+
+        # Initialize weights
+        self.init_weights()
+
+    def init_weights(self):
+        """
+        Initialize the weights of the classification layer.
+        """
+        nn.init.xavier_uniform_(self.classifier.weight)
+        if self.classifier.bias is not None:
+            nn.init.zeros_(self.classifier.bias)
     
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, labels=None):
-        with torch.no_grad():
-            outputs = self.bert(input_ids=input_ids, 
-                                attention_mask=attention_mask, 
-                                token_type_ids=token_type_ids,
-                                return_dict=True)
-            pooled_output = outputs.pooler_output  # [batch_size, hidden_size]
         
-        disease_logits = self.classifier(pooled_output)  # [batch_size, num_diseases]
+        outputs = self.bert(input_ids=input_ids, 
+                            attention_mask=attention_mask, 
+                            token_type_ids=token_type_ids,
+                            return_dict=True)
+        
+        # Extract the [CLS] token's embedding
+        cls_embedding = outputs.last_hidden_state[:, 0, :]
+        
+        # Compute logits
+        logits = self.classifier(cls_embedding)
+        
+        # Apply Sparsemax activation
+        probs = self.sparsemax(logits)
         
         loss = None
         if labels is not None:
-            loss_fct = nn.BCEWithLogitsLoss()
-            loss = loss_fct(disease_logits, labels)
+            loss_fct = nn.MSELoss()
+            loss = loss_fct(probs, labels)
         
-        return {'loss': loss, 'logits': disease_logits}
+        return {'loss': loss, 'probs': probs}
 
 
 ## DATASET DEFINITION ##
@@ -260,6 +281,8 @@ def parse_y_entry(y_str):
 
 ## MAIN ##
 def main(args):
+    global timeforit
+    timeforit = 0
     # Seed for reproducibility
     random.seed(42)
     np.random.seed(42)
@@ -275,8 +298,8 @@ def main(args):
     train_csv = args.train_csv
     output_dir = args.output_dir
 
-    data = pd.read_csv('../data/short_input.csv')
-    data = data[:1000]
+    data = pd.read_csv('../data/input.csv')
+    data = data[:100000]
     
     # 1. Split Q&A into Sentence Pairs
     sentence_a = []
@@ -425,7 +448,7 @@ def main(args):
         save_strategy='epoch',
         logging_dir='./logs_disease',
         logging_steps=50,
-        learning_rate=1e-3,  # Higher learning rate since BERT is frozen
+        learning_rate=5e-4,  # Higher learning rate since BERT is frozen
         weight_decay=0.01,
         save_total_limit=2,
         disable_tqdm=False
