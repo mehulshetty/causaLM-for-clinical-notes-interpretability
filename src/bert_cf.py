@@ -10,6 +10,8 @@ import torch.nn as nn
 from torch.utils.data import Dataset
 from transformers import BertTokenizerFast, BertModel, BertPreTrainedModel, BertConfig, BertForPreTraining, Trainer, TrainingArguments, DataCollatorForLanguageModeling
 from sparsemax import Sparsemax
+from utils.config import *
+from datetime import datetime
 
 import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -227,7 +229,7 @@ class MultiTaskDataset(Dataset):
         item['labels_nsp'] = self.labels_nsp[idx]
         item['chest_pain_labels'] = self.chest_pain_labels[idx]
         return item
-    
+
 class DiseasePredictionDataset(Dataset):
     def __init__(self, encodings, disease_labels):
         self.encodings = encodings
@@ -288,6 +290,17 @@ def main(args):
     np.random.seed(42)
     torch.manual_seed(42)
 
+    # parser = argparse.ArgumentParser(description="Super Mario RL Training")
+    # parser.add_argument('--job_id', type=int, required=True, help='Unique Job ID')
+    # args = parser.parse_args()
+    #
+    # job_id = args.job_id
+    job_id = 5
+
+    timestamp = datetime.now().strftime('%m%d_%H%M%S')
+    models_dir, results_pretraining_dir, results_disease_dir, logs_pretraining_dir, logs_disease_dir = (
+        create_save_files_directories(timestamp, job_id))
+
     global curr_step
     curr_step = 0
 
@@ -298,8 +311,14 @@ def main(args):
     train_csv = args.train_csv
     output_dir = args.output_dir
 
+    # For local
     data = pd.read_csv('../data/input.csv')
-    data = data[:100000]
+
+    # For CARC
+    # data = pd.read_csv('data/input.csv')
+
+    print(data.shape)
+    data = data.sample(n=TRAIN_SAMPLE_SIZE)
     
     # 1. Split Q&A into Sentence Pairs
     sentence_a = []
@@ -370,17 +389,31 @@ def main(args):
 
     # 8. Define Training Arguments for Pre-Training
     training_args_pretraining = TrainingArguments(
-        output_dir='./results_pretraining',
+        output_dir=results_pretraining_dir,
         num_train_epochs=epochs,
         per_device_train_batch_size=3,
         gradient_accumulation_steps=2,
         save_strategy='epoch',
-        logging_dir='./logs_pretraining',
+        logging_dir=logs_pretraining_dir,
         logging_steps=50,
         learning_rate=5e-5,
         weight_decay=0.01,
         save_total_limit=2,
         disable_tqdm=False
+    )
+
+    training_args_disease = TrainingArguments(
+        output_dir=results_pretraining_dir,
+        num_train_epochs=args.disease_prediction_epochs,
+        per_device_train_batch_size=2,  # Reduced batch size
+        save_strategy='epoch',
+        logging_dir=args.disease_logging_dir,
+        logging_steps=50,
+        learning_rate=args.disease_prediction_learning_rate,
+        weight_decay=args.weight_decay,
+        save_total_limit=2,
+        disable_tqdm=False,
+        fp16=True  # Enable mixed precision
     )
 
     print("8")
@@ -398,7 +431,7 @@ def main(args):
     # 10. Train the Multi-Task Model
     print("Starting pre-training with MLM, NSP, and adversarial tasks...")
     trainer_pretraining.train()
-    trainer_pretraining.save_model('./models/pretrained_model')
+    trainer_pretraining.save_model(os.path.join(models_dir, 'pretrained_model'))
 
     print("10")
     
@@ -406,72 +439,72 @@ def main(args):
     # Learning for Disease Prediction
     # ------------------------------
     
-    # 1. Prepare Data for Disease Prediction
-    # Tokenize the original sentence pairs without masking
-    tokenized_inputs_disease = tokenizer(
-        data['X'].tolist(),
-        truncation=True,
-        padding='max_length',
-        max_length=512,
-        return_tensors='pt'
-    )
-
-    print("11")
+    # # 1. Prepare Data for Disease Prediction
+    # # Tokenize the original sentence pairs without masking
+    # tokenized_inputs_disease = tokenizer(
+    #     data['X'].tolist(),
+    #     truncation=True,
+    #     padding='max_length',
+    #     max_length=512,
+    #     return_tensors='pt'
+    # )
+    #
+    # print("11")
+    #
+    # # 2. Create Disease Prediction Labels
+    # # Assuming each sentence pair corresponds to a single clinical note
+    # # Here, we aggregate disease labels per clinical note
+    # # Adjust as per your data's actual correspondence
+    # # For simplicity, we map each positive NSP pair to its corresponding disease labels
+    # # This might need to be adjusted based on your actual data structure
+    # disease_labels = data['Y'].apply(parse_y_entry)
+    #
+    # print("12")
+    #
+    # # 3. Create Disease Prediction Dataset
+    # dataset_disease = DiseasePredictionDataset(tokenized_inputs_disease, disease_labels)
+    # print("13")
+    #
+    # # 4. Initialize the Disease Prediction Model
+    # # Load the pre-trained model
+    # pretrained_model = BertModel.from_pretrained(os.path.join(models_dir, 'pretrained_model'))
+    # model_disease = BertForDiseasePrediction(pretrained_model, num_diseases=49)
+    # model_disease.to(device)
+    #
+    # print("14")
+    #
+    # # 5. Define Training Arguments for Disease Prediction
+    # training_args_disease = TrainingArguments(
+    #     output_dir=results_disease_dir,
+    #     num_train_epochs=3,
+    #     per_device_train_batch_size=3,
+    #     save_strategy='epoch',
+    #     logging_dir=logs_disease_dir,
+    #     logging_steps=50,
+    #     learning_rate=5e-4,  # Higher learning rate since BERT is frozen
+    #     weight_decay=0.01,
+    #     save_total_limit=2,
+    #     disable_tqdm=False
+    # )
+    #
+    # print("15")
+    #
+    # # 6. Initialize the Disease Trainer
+    # trainer_disease = DiseaseTrainer(
+    #     model=model_disease,
+    #     args=training_args_disease,
+    #     train_dataset=dataset_disease,
+    #     # eval_dataset=dataset_disease,  # Ideally, use a separate validation set
+    # )
+    #
+    # print("16")
+    #
+    # # 7. Train the Disease Prediction Model
+    # print("Starting fine-tuning for disease prediction...")
+    # trainer_disease.train()
+    # trainer_disease.save_model(os.path.join(models_dir, 'disease_prediction_model'))
     
-    # 2. Create Disease Prediction Labels
-    # Assuming each sentence pair corresponds to a single clinical note
-    # Here, we aggregate disease labels per clinical note
-    # Adjust as per your data's actual correspondence
-    # For simplicity, we map each positive NSP pair to its corresponding disease labels
-    # This might need to be adjusted based on your actual data structure
-    disease_labels = data['Y'].apply(parse_y_entry)
-
-    print("12")
-    
-    # 3. Create Disease Prediction Dataset
-    dataset_disease = DiseasePredictionDataset(tokenized_inputs_disease, disease_labels)
-    print("13")
-    
-    # 4. Initialize the Disease Prediction Model
-    # Load the pre-trained model
-    pretrained_model = BertModel.from_pretrained('./models/pretrained_model')
-    model_disease = BertForDiseasePrediction(pretrained_model, num_diseases=49)
-    model_disease.to(device)
-
-    print("14")
-    
-    # 5. Define Training Arguments for Disease Prediction
-    training_args_disease = TrainingArguments(
-        output_dir='./results_disease',
-        num_train_epochs=3,
-        per_device_train_batch_size=3,
-        save_strategy='epoch',
-        logging_dir='./logs_disease',
-        logging_steps=50,
-        learning_rate=5e-4,  # Higher learning rate since BERT is frozen
-        weight_decay=0.01,
-        save_total_limit=2,
-        disable_tqdm=False
-    )
-
-    print("15")
-    
-    # 6. Initialize the Disease Trainer
-    trainer_disease = DiseaseTrainer(
-        model=model_disease,
-        args=training_args_disease,
-        train_dataset=dataset_disease,
-        # eval_dataset=dataset_disease,  # Ideally, use a separate validation set
-    )
-
-    print("16")
-    
-    # 7. Train the Disease Prediction Model
-    print("Starting fine-tuning for disease prediction...")
-    trainer_disease.train()
-    trainer_disease.save_model('./models/disease_prediction_model')
-    
-    print("Training complete. Models saved in './models/' directory.")
+    print(f"Training complete. Models saved in {models_dir} directory.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train BERT-CF Model")
