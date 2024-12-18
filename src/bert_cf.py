@@ -115,7 +115,7 @@ class CustomBertForPreTrainingWithAdversary(BertForPreTraining):
         self.init_weights()
     
     def forward(self, input_ids, attention_mask=None, token_type_ids=None,
-                labels_mlm=None, labels_nsp=None, chest_pain_labels=None, lambda_=3):
+                labels_mlm=None, labels_nsp=None, chest_pain_labels=None, lambda_=6.0):
         outputs = super().forward(
             input_ids=input_ids,
             attention_mask=attention_mask,
@@ -299,7 +299,7 @@ def main(args):
     output_dir = args.output_dir
 
     data = pd.read_csv('../data/input.csv')
-    data = data[:100000]
+    data = data[:65000]
     
     # 1. Split Q&A into Sentence Pairs
     sentence_a = []
@@ -328,7 +328,7 @@ def main(args):
         combined_sentence_b,
         truncation=True,
         padding='max_length',
-        max_length=128,
+        max_length=512,
         return_tensors='pt'
     )
 
@@ -376,7 +376,7 @@ def main(args):
         gradient_accumulation_steps=2,
         save_strategy='epoch',
         logging_dir='./logs_pretraining',
-        logging_steps=50,
+        logging_steps=1000,
         learning_rate=5e-5,
         weight_decay=0.01,
         save_total_limit=2,
@@ -477,8 +477,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train BERT-CF Model")
     parser.add_argument('--train_csv', type=str, default="", help="Path to the training CSV file.")
     parser.add_argument('--output_dir', type=str, default="", help="Directory to save the fine-tuned model.")
-    parser.add_argument('--epochs', type=int, default=5, help="Number of training epochs.")
-    parser.add_argument('--lambda_', type=float, default=1.0, help="Gradient reversal scaling factor.")
+    parser.add_argument('--epochs', type=int, default=3, help="Number of training epochs.")
+    parser.add_argument('--lambda_', type=float, default=3.0, help="Gradient reversal scaling factor.")
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu', help="Device to train on.")
     
     args = parser.parse_args()
